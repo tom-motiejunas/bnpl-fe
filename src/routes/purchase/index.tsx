@@ -11,8 +11,8 @@ function Index() {
       <Link to="/purchase/log-in">
         <Button>Log In</Button>
       </Link>
-      <Link to="/purchase/sign-in">
-        <Button>Sign In</Button>
+      <Link to="/purchase/sign-up">
+        <Button>Sign Up</Button>
       </Link>
       <Outlet />
     </div>

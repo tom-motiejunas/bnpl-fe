@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { CardSelectItem } from '@/components/CardSelectItem';
 
@@ -9,7 +9,9 @@ export const Route = createFileRoute('/purchase/card-select')({
 function CardSelect() {
   return (
     <div className="flex w-full max-w-80 flex-col gap-8">
-      <CardSelectItem />
+      <Link to="/purchase/load">
+        <CardSelectItem />
+      </Link>
       <Button>Add New Card</Button>
     </div>
   );
