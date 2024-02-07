@@ -16,12 +16,6 @@ module.exports = {
         '2xl': '1400px',
       },
     },
-    colors: {
-      'background-color': '#393646',
-      primary: '#4F4557',
-      secondary: '#6D5D6E',
-      tertiary: '#F4EEE0',
-    },
     extend: {
       keyframes: {
         'accordion-down': {
@@ -36,6 +30,12 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      colors: {
+        'background-color': '#393646',
+        primary: '#4F4557',
+        secondary: '#6D5D6E',
+        tertiary: '#F4EEE0',
       },
     },
   },

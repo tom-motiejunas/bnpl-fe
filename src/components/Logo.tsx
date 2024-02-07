@@ -1,10 +1,20 @@
+import React from 'react';
 import LogoPicture from '../assets/Logo.png';
 
-export default function Logo() {
+const Logo = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLElement>
+>(({ className, ...props }, ref) => {
   return (
-    <div className="flex h-[30px] w-[135px] items-center gap-2">
+    <div
+      ref={ref}
+      className={'flex h-[30px] w-[135px] items-center gap-2'}
+      {...props}
+    >
       <img src={LogoPicture} />
-      <h2 className="text-tertiary text-center text-xs">Place Holder Co.</h2>
+      <h2 className="text-center text-xs text-tertiary">Place Holder Co.</h2>
     </div>
   );
-}
+});
+
+export { Logo };
