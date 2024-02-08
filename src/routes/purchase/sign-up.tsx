@@ -35,8 +35,7 @@ function SignUp() {
   });
 
   function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values);
-    navigate({ to: '/purchase/card-select' });
+    navigate({ to: '/purchase/transitional' });
   }
 
   return (
@@ -56,7 +55,7 @@ function SignUp() {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormMessage className="text-red-500" />
+                <FormMessage />
               </FormItem>
             )}
           ></FormField>

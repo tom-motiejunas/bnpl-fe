@@ -14,11 +14,13 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as PurchaseImport } from './routes/purchase'
 import { Route as IndexImport } from './routes/index'
 import { Route as PurchaseIndexImport } from './routes/purchase/index'
+import { Route as PurchaseTransitionalImport } from './routes/purchase/transitional'
 import { Route as PurchaseSuccessImport } from './routes/purchase/success'
 import { Route as PurchaseSignUpImport } from './routes/purchase/sign-up'
 import { Route as PurchaseLogInImport } from './routes/purchase/log-in'
 import { Route as PurchaseLoadImport } from './routes/purchase/load'
 import { Route as PurchaseCardSelectImport } from './routes/purchase/card-select'
+import { Route as PurchaseAddCardImport } from './routes/purchase/add-card'
 
 // Create/Update Routes
 
@@ -34,6 +36,11 @@ const IndexRoute = IndexImport.update({
 
 const PurchaseIndexRoute = PurchaseIndexImport.update({
   path: '/',
+  getParentRoute: () => PurchaseRoute,
+} as any)
+
+const PurchaseTransitionalRoute = PurchaseTransitionalImport.update({
+  path: '/transitional',
   getParentRoute: () => PurchaseRoute,
 } as any)
 
@@ -62,6 +69,11 @@ const PurchaseCardSelectRoute = PurchaseCardSelectImport.update({
   getParentRoute: () => PurchaseRoute,
 } as any)
 
+const PurchaseAddCardRoute = PurchaseAddCardImport.update({
+  path: '/add-card',
+  getParentRoute: () => PurchaseRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -73,6 +85,10 @@ declare module '@tanstack/react-router' {
     '/purchase': {
       preLoaderRoute: typeof PurchaseImport
       parentRoute: typeof rootRoute
+    }
+    '/purchase/add-card': {
+      preLoaderRoute: typeof PurchaseAddCardImport
+      parentRoute: typeof PurchaseImport
     }
     '/purchase/card-select': {
       preLoaderRoute: typeof PurchaseCardSelectImport
@@ -94,6 +110,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PurchaseSuccessImport
       parentRoute: typeof PurchaseImport
     }
+    '/purchase/transitional': {
+      preLoaderRoute: typeof PurchaseTransitionalImport
+      parentRoute: typeof PurchaseImport
+    }
     '/purchase/': {
       preLoaderRoute: typeof PurchaseIndexImport
       parentRoute: typeof PurchaseImport
@@ -106,11 +126,13 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   PurchaseRoute.addChildren([
+    PurchaseAddCardRoute,
     PurchaseCardSelectRoute,
     PurchaseLoadRoute,
     PurchaseLogInRoute,
     PurchaseSignUpRoute,
     PurchaseSuccessRoute,
+    PurchaseTransitionalRoute,
     PurchaseIndexRoute,
   ]),
 ])

@@ -35,7 +35,6 @@ function LogIn() {
   });
 
   function onSubmit(values: z.infer<typeof logInSchema>) {
-    console.log(values);
     navigate({ to: '/purchase/card-select' });
   }
 
@@ -56,7 +55,7 @@ function LogIn() {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormMessage className="text-red-500" />
+                <FormMessage />
               </FormItem>
             )}
           ></FormField>
