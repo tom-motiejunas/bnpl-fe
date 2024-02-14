@@ -9,6 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { useLogin } from '@/hooks';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
@@ -33,8 +34,17 @@ function LogIn() {
       password: '',
     },
   });
+  const login = useLogin();
 
   function onSubmit(values: z.infer<typeof logInSchema>) {
+    login.mutate(values);
+  }
+
+  if (login.isError) {
+    // TODO: Replace with shadcn Sonner toast
+    console.log(login.error.message);
+  }
+  if (login.isSuccess) {
     navigate({ to: '/purchase/card-select' });
   }
 
