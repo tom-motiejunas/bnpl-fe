@@ -15,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useEffect } from 'react';
 
 export const Route = createFileRoute('/purchase/log-in')({
   component: LogIn,
@@ -44,9 +45,12 @@ function LogIn() {
     // TODO: Replace with shadcn Sonner toast
     console.log(login.error.message);
   }
-  if (login.isSuccess) {
+  useEffect(() => {
+    if (!login.isSuccess) {
+      return;
+    }
     navigate({ to: '/purchase/card-select' });
-  }
+  }, [login.isSuccess]);
 
   return (
     <div className="w-80">

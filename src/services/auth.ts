@@ -7,9 +7,7 @@ export async function postSignup(): Promise<TokenResponse> {
   ).json() as Promise<TokenResponse>;
 }
 
-export async function postLogin(
-  LoginRequest: LoginRequest,
-): Promise<TokenResponse> {
+export async function postLogin(LoginRequest: LoginRequest): Promise<void> {
   const loginParams = {
     method: 'POST',
     headers: {
@@ -24,7 +22,10 @@ export async function postLogin(
     throw new Error(`Failed to login`);
   }
 
-  return response.json() as Promise<TokenResponse>;
+  const token = response.json() as Promise<TokenResponse>;
+  localStorage.setItem('token', JSON.stringify((await token).token));
+
+  return;
 }
 
 // TODO: add fetch params
@@ -32,4 +33,8 @@ export async function postLogout(): Promise<StatusResponse> {
   return (
     await fetch('http://bnpl.test:89/api/log-out')
   ).json() as Promise<StatusResponse>;
+}
+
+export function isAuthenticated(): boolean {
+  return localStorage.getItem('token') ? true : false;
 }

@@ -12,7 +12,9 @@ function CardSelect() {
       <Link to="/purchase/load">
         <CardSelectItem />
       </Link>
-      <Button>Add New Card</Button>
+      <Link to="/purchase/add-card">
+        <Button>Add New Card</Button>
+      </Link>
     </div>
   );
 }
