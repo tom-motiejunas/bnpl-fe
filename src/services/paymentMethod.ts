@@ -1,5 +1,26 @@
 import { PaymentMethodRequest } from '@/types/PaymentMethod';
 
+export async function getPaymentMethod() {
+  const paymentMethodParams = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`,
+    },
+  };
+
+  const response = await fetch(
+    'http://bnpl.test:89/api/get-payments',
+    paymentMethodParams,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to get payment methods`);
+  }
+
+  return response.json();
+}
+
 export async function postPaymentMethod(
   PaymentMethodRequest: PaymentMethodRequest,
 ): Promise<void> {

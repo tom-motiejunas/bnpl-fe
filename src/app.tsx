@@ -19,7 +19,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY ?? '');
 
 function InnerApp() {
   const auth = useAuth();
-  console.log(`Update: ${auth.data}`);
+
   if (auth.isFetched) {
     return <RouterProvider router={router} context={{ auth: auth.data }} />;
   }
