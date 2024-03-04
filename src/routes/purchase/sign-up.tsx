@@ -10,8 +10,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useSignup } from '@/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -26,6 +28,7 @@ const signUpSchema = z.object({
 
 function SignUp() {
   const navigate = useNavigate();
+  const signup = useSignup();
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -35,8 +38,15 @@ function SignUp() {
   });
 
   function onSubmit(values: z.infer<typeof signUpSchema>) {
-    navigate({ to: '/purchase/transitional' });
+    signup.mutate(values);
   }
+
+  useEffect(() => {
+    if (!signup.isSuccess) {
+      return;
+    }
+    navigate({ to: '/purchase/card-select' });
+  }, [signup.isSuccess]);
 
   return (
     <div className="w-80">

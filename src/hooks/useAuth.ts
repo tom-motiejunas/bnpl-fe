@@ -18,18 +18,16 @@ export const useLogin = () =>
     mutationFn: postLogin,
   });
 
-// TODO: change to useMutation
 export const useSignup = () =>
-  useQuery({
-    queryKey: SIGNUP_QUERY_KEY,
-    queryFn: postSignup,
+  useMutation({
+    mutationKey: SIGNUP_QUERY_KEY,
+    mutationFn: postSignup,
   });
 
-// TODO: change to useMutation
 export const useLogout = () =>
-  useQuery({
-    queryKey: LOGOUT_QUERY_KEY,
-    queryFn: postLogout,
+  useMutation({
+    mutationKey: LOGOUT_QUERY_KEY,
+    mutationFn: postLogout,
   });
 
 export const useAuth = () =>

@@ -1,10 +1,29 @@
-import { LoginRequest, StatusResponse, TokenResponse } from '@/types';
+import {
+  LoginRequest,
+  SignupRequest,
+  StatusResponse,
+  TokenResponse,
+} from '@/types';
 
-// TODO: add fetch params
-export async function postSignup(): Promise<TokenResponse> {
-  return (
-    await fetch('http://bnpl.test:89/api/sign-up')
-  ).json() as Promise<TokenResponse>;
+export async function postSignup(SignupRequest: SignupRequest): Promise<void> {
+  const signupParams = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(SignupRequest),
+  };
+
+  const response = await fetch('http://bnpl.test:89/api/sign-up', signupParams);
+
+  if (!response.ok) {
+    throw new Error(`Failed to signup`);
+  }
+
+  const token = response.json() as Promise<TokenResponse>;
+  localStorage.setItem('token', JSON.stringify((await token).token));
+
+  return;
 }
 
 export async function postLogin(LoginRequest: LoginRequest): Promise<void> {
@@ -30,9 +49,24 @@ export async function postLogin(LoginRequest: LoginRequest): Promise<void> {
 
 // TODO: add fetch params
 export async function postLogout(): Promise<StatusResponse> {
-  return (
-    await fetch('http://bnpl.test:89/api/log-out')
-  ).json() as Promise<StatusResponse>;
+  const logoutParams = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`,
+    },
+  };
+
+  const response = await fetch(
+    'http://bnpl.test:89/api/get-payments',
+    logoutParams,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to logout`);
+  }
+
+  return response.json();
 }
 
 export function isAuthenticated(): boolean {
