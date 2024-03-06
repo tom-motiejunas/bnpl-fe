@@ -19,6 +19,7 @@ import { Route as PurchaseSuccessImport } from './routes/purchase/success'
 import { Route as PurchaseSignUpImport } from './routes/purchase/sign-up'
 import { Route as PurchaseLogInImport } from './routes/purchase/log-in'
 import { Route as PurchaseLoadImport } from './routes/purchase/load'
+import { Route as PurchaseConfirmImport } from './routes/purchase/confirm'
 import { Route as PurchaseCardSelectImport } from './routes/purchase/card-select'
 import { Route as PurchaseAddCardImport } from './routes/purchase/add-card'
 
@@ -64,6 +65,11 @@ const PurchaseLoadRoute = PurchaseLoadImport.update({
   getParentRoute: () => PurchaseRoute,
 } as any)
 
+const PurchaseConfirmRoute = PurchaseConfirmImport.update({
+  path: '/confirm',
+  getParentRoute: () => PurchaseRoute,
+} as any)
+
 const PurchaseCardSelectRoute = PurchaseCardSelectImport.update({
   path: '/card-select',
   getParentRoute: () => PurchaseRoute,
@@ -92,6 +98,10 @@ declare module '@tanstack/react-router' {
     }
     '/purchase/card-select': {
       preLoaderRoute: typeof PurchaseCardSelectImport
+      parentRoute: typeof PurchaseImport
+    }
+    '/purchase/confirm': {
+      preLoaderRoute: typeof PurchaseConfirmImport
       parentRoute: typeof PurchaseImport
     }
     '/purchase/load': {
@@ -128,6 +138,7 @@ export const routeTree = rootRoute.addChildren([
   PurchaseRoute.addChildren([
     PurchaseAddCardRoute,
     PurchaseCardSelectRoute,
+    PurchaseConfirmRoute,
     PurchaseLoadRoute,
     PurchaseLogInRoute,
     PurchaseSignUpRoute,

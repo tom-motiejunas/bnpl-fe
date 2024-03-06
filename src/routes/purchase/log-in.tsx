@@ -50,7 +50,7 @@ function LogIn() {
       return;
     }
     navigate({ to: '/purchase/card-select' });
-  }, [login.isSuccess]);
+  }, [login.isSuccess, navigate]);
 
   return (
     <div className="w-80">

@@ -46,7 +46,7 @@ function SignUp() {
       return;
     }
     navigate({ to: '/purchase/card-select' });
-  }, [signup.isSuccess]);
+  }, [signup.isSuccess, navigate]);
 
   return (
     <div className="w-80">

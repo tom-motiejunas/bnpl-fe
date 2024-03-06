@@ -12,7 +12,7 @@ function CardSelect() {
 
   return (
     <div className="flex w-full max-w-80 flex-col gap-8">
-      <Link to="/purchase/load">
+      <Link to="/purchase/confirm">
         <CardSelectItems items={cards.data} />
       </Link>
       <Link to="/purchase/add-card">

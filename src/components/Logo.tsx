@@ -1,5 +1,6 @@
 import React from 'react';
 import LogoPicture from '../assets/Logo.png';
+import { cn } from '@/lib/utils';
 
 const Logo = React.forwardRef<
   HTMLDivElement,
@@ -8,7 +9,7 @@ const Logo = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={'flex h-[30px] w-[135px] items-center gap-2'}
+      className={cn('flex h-[30px] w-[135px] items-center gap-2', className)}
       {...props}
     >
       <img src={LogoPicture} />
