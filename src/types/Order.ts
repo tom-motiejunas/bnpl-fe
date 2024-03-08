@@ -15,3 +15,8 @@ export interface Product {
   name: string;
   price: string;
 }
+
+export interface ConfirmOrderRequest {
+  order_id: number;
+  payment_method_id: string;
+}

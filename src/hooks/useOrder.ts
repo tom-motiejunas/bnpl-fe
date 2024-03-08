@@ -1,6 +1,6 @@
-import { ORDER_QUERY_KEY } from '@/constants';
-import { getOrder } from '@/services/order';
-import { useQuery } from '@tanstack/react-query';
+import { ORDER_QUERY_KEY, ORDER_SUBMIT_QUERY_KEY } from '@/constants';
+import { getOrder, submitOrder } from '@/services/order';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useOrder = () =>
   useQuery({
@@ -8,4 +8,8 @@ export const useOrder = () =>
     queryFn: getOrder,
   });
 
-// TODO: implement useSubmitOrder
+export const useSubmitOrder = () =>
+  useMutation({
+    mutationKey: ORDER_SUBMIT_QUERY_KEY,
+    mutationFn: submitOrder,
+  });
