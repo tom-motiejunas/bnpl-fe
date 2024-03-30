@@ -2,8 +2,9 @@ import { Button } from '@/components/ui/button';
 import { useOrder, useSubmitOrder } from '@/hooks/useOrder';
 import { cn } from '@/lib/utils';
 import { ConfirmOrderRequest } from '@/types/Order';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Loader2 } from 'lucide-react';
+import { useEffect } from 'react';
 
 export const Route = createFileRoute('/purchase/confirm')({
   component: Confirm,
@@ -18,22 +19,32 @@ interface ItemProps {
 function Confirm() {
   const order = useOrder();
   const submitOrder = useSubmitOrder();
+  const navigate = useNavigate();
 
   const onConfirm = () => {
     const orderId = localStorage.getItem('orderId');
+    const shopId = localStorage.getItem('shopId');
     const paymentMethodId = localStorage.getItem('paymentMethodId');
 
-    if (!orderId || !paymentMethodId) {
+    if (!orderId || !paymentMethodId || !shopId) {
       return;
     }
 
     const submitOrderValues: ConfirmOrderRequest = {
       order_id: +orderId,
+      shop_id: +shopId,
       payment_method_id: paymentMethodId,
     };
 
     submitOrder.mutate(submitOrderValues);
   };
+
+  useEffect(() => {
+    if (!submitOrder.isSuccess) {
+      return;
+    }
+    navigate({ to: '/purchase/success' });
+  }, [submitOrder.isSuccess]);
 
   return (
     <div className="flex flex-grow flex-col items-center justify-center gap-8">

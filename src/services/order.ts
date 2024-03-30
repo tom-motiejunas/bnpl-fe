@@ -10,9 +10,11 @@ export async function getOrder(): Promise<OrderItem> {
   };
 
   const orderId = localStorage.getItem('orderId');
+  const shopId = localStorage.getItem('shopId');
+  // TODO: Add toaster if not found
 
   const response = await fetch(
-    `http://bnpl.test:89/api/get-order/${orderId}`,
+    `http://bnpl.test:89/api/get-order/${orderId}/shop/${shopId}`,
     orderParams,
   );
 

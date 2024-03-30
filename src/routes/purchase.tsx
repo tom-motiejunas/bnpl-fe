@@ -1,19 +1,21 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router';
 import { Logo } from '../components/Logo';
 
-interface OrderId {
+interface SearchParams {
   order_id?: string;
+  shop_id?: string;
 }
 
 export const Route = createFileRoute('/purchase')({
   component: Purchase,
   beforeLoad: ({ location }) => {
-    const search: OrderId = location.search;
+    const search: SearchParams = location.search;
 
-    if (search?.order_id) {
+    if (search?.order_id && search?.shop_id) {
       localStorage.setItem('orderId', search.order_id);
+      localStorage.setItem('shopId', search.shop_id);
     } else {
-      // TODO: return that no order has been found
+      // TODO: return that no order or shop has been found
     }
 
     const notAuthenticatedRoutes = [

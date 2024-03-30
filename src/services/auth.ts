@@ -47,7 +47,6 @@ export async function postLogin(LoginRequest: LoginRequest): Promise<void> {
   return;
 }
 
-// TODO: add fetch params
 export async function postLogout(): Promise<StatusResponse> {
   const logoutParams = {
     method: 'POST',

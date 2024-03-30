@@ -18,5 +18,6 @@ export interface Product {
 
 export interface ConfirmOrderRequest {
   order_id: number;
+  shop_id: number;
   payment_method_id: string;
 }
