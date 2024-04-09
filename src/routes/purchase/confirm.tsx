@@ -44,7 +44,7 @@ function Confirm() {
       return;
     }
     navigate({ to: '/purchase/success' });
-  }, [submitOrder.isSuccess]);
+  }, [submitOrder.isSuccess, navigate]);
 
   return (
     <div className="flex flex-grow flex-col items-center justify-center gap-8">

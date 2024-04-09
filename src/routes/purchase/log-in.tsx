@@ -26,7 +26,7 @@ const logInSchema = z.object({
   password: z.string().min(4),
 });
 
-function LogIn() {
+export function LogIn() {
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof logInSchema>>({
     resolver: zodResolver(logInSchema),
