@@ -5,13 +5,13 @@ export async function getPaymentMethod() {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`,
-    },
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`
+    }
   };
 
   const response = await fetch(
     'http://bnpl.test:89/api/get-payments',
-    paymentMethodParams,
+    paymentMethodParams
   );
 
   if (!response.ok) {
@@ -22,20 +22,20 @@ export async function getPaymentMethod() {
 }
 
 export async function postPaymentMethod(
-  PaymentMethodRequest: PaymentMethodRequest,
+  PaymentMethodRequest: PaymentMethodRequest
 ): Promise<void> {
   const paymentMethodParams = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`,
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`
     },
-    body: JSON.stringify(PaymentMethodRequest),
+    body: JSON.stringify(PaymentMethodRequest)
   };
 
   const response = await fetch(
     'http://bnpl.test:89/api/add-payment',
-    paymentMethodParams,
+    paymentMethodParams
   );
 
   if (!response.ok) {
@@ -43,4 +43,28 @@ export async function postPaymentMethod(
   }
 
   return response.json();
+}
+
+export async function removePaymentMethod(
+  PaymentMethodRequest: PaymentMethodRequest
+): Promise<void> {
+  const paymentMethodParams = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`
+    },
+    body: JSON.stringify(PaymentMethodRequest)
+  };
+
+  const response = await fetch(
+    'http://bnpl.test:89/api/remove-payment',
+    paymentMethodParams
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to remove payment method`);
+  }
+
+  return;
 }
