@@ -2,10 +2,10 @@ import { Link, Outlet, createFileRoute } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute('/purchase/')({
-  component: Index,
+  component: Index
 });
 
-function Index() {
+export function Index() {
   return (
     <div className="flex w-80 flex-col gap-8">
       <Link to="/purchase/log-in">

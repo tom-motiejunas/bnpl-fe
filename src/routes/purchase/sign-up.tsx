@@ -26,7 +26,7 @@ const signUpSchema = z.object({
   password: z.string().min(4),
 });
 
-function SignUp() {
+export function SignUp() {
   const navigate = useNavigate();
   const signup = useSignup();
   const form = useForm<z.infer<typeof signUpSchema>>({

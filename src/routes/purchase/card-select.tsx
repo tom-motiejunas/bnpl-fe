@@ -4,10 +4,10 @@ import { CardSelectItems } from '@/components/CardSelectItem';
 import { useGetPaymentMethod } from '@/hooks/usePayment';
 
 export const Route = createFileRoute('/purchase/card-select')({
-  component: CardSelect,
+  component: CardSelect
 });
 
-function CardSelect() {
+export function CardSelect() {
   const cards = useGetPaymentMethod();
   const navigate = useNavigate();
 

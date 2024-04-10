@@ -6,10 +6,10 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/purchase/add-card')({
-  component: AddCard,
+  component: AddCard
 });
 
-function AddCard() {
+export function AddCard() {
   const stripe = useStripe();
   const elements = useElements();
   const addPaymentMethod = usePaymentMethod();
@@ -24,7 +24,7 @@ function AddCard() {
 
     const response = await stripe.createPaymentMethod({
       type: 'card',
-      card: elements.getElement(CardElement)!,
+      card: elements.getElement(CardElement)!
     });
 
     if (response.error) {
@@ -58,10 +58,10 @@ function AddCard() {
                 fontSize: '16px',
                 color: '#F4EEE0',
                 '::placeholder': {
-                  color: '#F4EEE0',
-                },
-              },
-            },
+                  color: '#F4EEE0'
+                }
+              }
+            }
           }}
         />
         <Button type="submit" className="mt-8">

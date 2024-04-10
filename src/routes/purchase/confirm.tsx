@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react';
 import { useEffect } from 'react';
 
 export const Route = createFileRoute('/purchase/confirm')({
-  component: Confirm,
+  component: Confirm
 });
 
 interface ItemProps {
@@ -16,7 +16,7 @@ interface ItemProps {
   className?: string;
 }
 
-function Confirm() {
+export function Confirm() {
   const order = useOrder();
   const submitOrder = useSubmitOrder();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ function Confirm() {
     const submitOrderValues: ConfirmOrderRequest = {
       order_id: +orderId,
       shop_id: +shopId,
-      payment_method_id: paymentMethodId,
+      payment_method_id: paymentMethodId
     };
 
     submitOrder.mutate(submitOrderValues);

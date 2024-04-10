@@ -6,7 +6,7 @@ export const Route = createFileRoute('/purchase/success')({
   component: Success,
 });
 
-function Success() {
+export function Success() {
   const [timer, setTimer] = useState(10);
 
   setInterval(() => {
